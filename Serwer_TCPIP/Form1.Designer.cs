@@ -82,6 +82,7 @@
             this.Stop.TabIndex = 4;
             this.Stop.Text = "Stop";
             this.Stop.UseVisualStyleBackColor = true;
+            this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
             // Form1
             // 
@@ -95,6 +96,7 @@
             this.Controls.Add(this.My_Port);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.My_Port)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

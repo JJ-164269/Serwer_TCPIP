@@ -42,9 +42,13 @@ namespace Serwer_TCPIP
                 serwer = new TcpListener(adresIP, port);
                 serwer.Start();
 
-                Info_connect.Items.Add("Nawiązano połączenie!");
+             klient = serwer.AcceptTcpClient(); /// inof o kliencie musi być przed IPEndPoint
 
-                klient = serwer.AcceptTcpClient();
+                IPEndPoint IP = (IPEndPoint)klient.Client.RemoteEndPoint;
+                Info_connect.Items.Add("[" + IP.ToString() + "] : Nawiązano połaczenie");
+          ///   Info_connect.Items.Add("Nawiązano połączenie!"); to wyżej pokazuje też skąd jest połączenie
+                
+                
                 Start.Enabled = false;
                 Stop.Enabled = true;
                 klient.Close();
@@ -57,6 +61,21 @@ namespace Serwer_TCPIP
             }
 
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {/// ten fragment kodu uzyskujemy kilkając na okno
+            Stop.Enabled = false;
+        }
+
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            serwer.Stop();
+            klient.Close();
+
+            Info_connect.Items.Add("Zakończono pracę serwera!");
+            Start.Enabled = true;
+            Stop.Enabled = false;
         }
     }
 }
